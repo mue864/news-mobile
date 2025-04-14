@@ -3,12 +3,17 @@ import NewsCard from "@/components/NewsCard";
 import NewsContext from "../data/NewsProvider";
 import { useCallback, useContext } from "react";
 import { useFocusEffect } from "expo-router";
+
+
 const Sport = () => {
-  const { setTag, loading, news } = useContext(NewsContext);
+  const context = useContext(NewsContext);
+  if (!context) throw new Error("Must be used inside a context");
+
+  const {setTag, setLoading, loading, news} = context;
  
   useFocusEffect(
     useCallback(() => {
-      console.log("focused")
+      setLoading(true);
       setTag("sport")
     }, [])
   );

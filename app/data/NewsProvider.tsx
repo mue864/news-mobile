@@ -18,6 +18,7 @@ type NewsContextTypes = {
   country: string;
   setCountry: (country: string) => void;
   loading: boolean;
+  setLoading: (loading: boolean) => void;
   news: Article[];
 };
 
@@ -29,7 +30,7 @@ interface NewsProviderProps {
 
 export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
   const [news, setNews] = useState<Article[]>([]);
-  const [tag, setTag] = useState("");
+  const [tag, setTag] = useState("technology");
   const [country, setCountry] = useState("world");
   const [loading, setLoading] = useState(true);
  const yesterday = new Date();
@@ -46,7 +47,7 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
       const randomPage = Math.floor(Math.random() * 5) + 1;
       try {
         const res = await axios.get(
-          `https://content.guardianapis.com/search?api-key=${GUARDIAN_API_KEY}&section=${country}&q=${tag}&show-fields=thumbnail&order-by=newest&page=${randomPage}&page-size=11`
+          `https://content.guardianapis.com/search?api-key=${GUARDIAN_API_KEY}&section=${country}&tag=${tag}/${tag}&show-fields=thumbnail&order-by=newest&page=${randomPage}&page-size=15`
         );
         
         const data = res.data.response.results.map(article => ({
@@ -58,8 +59,6 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
             image: article.fields?.thumbnail
         }));
         setNews(data);
-        console.log("tag: ", tag);
-        console.log(data);
         setLoading(false)
       } catch (error) {
         console.error("There has been an error", error);
@@ -69,7 +68,7 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
     fetchData();
   }, [tag]);
 
-  return <NewsContext.Provider value={{news, tag ,loading, country ,setTag, setCountry,}}>{children}</NewsContext.Provider>;
+  return <NewsContext.Provider value={{news, tag ,loading, setLoading ,country ,setTag, setCountry,}}>{children}</NewsContext.Provider>;
 };
 
 export default NewsContext;

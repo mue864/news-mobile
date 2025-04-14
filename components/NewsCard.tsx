@@ -1,5 +1,7 @@
 import {View, Text, Image, TouchableOpacity, StyleSheet, Dimensions, Pressable, StatusBar} from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
+import { useState } from 'react';
+
 interface NewsCardProps {
     news: {},
     isFirst: boolean
@@ -7,7 +9,15 @@ interface NewsCardProps {
 
 
 const NewsCard: React.FC<NewsCardProps> = ({news ,isFirst}) => {
-   
+  
+  const [like, setLike] = useState(false);
+  const [bookmark, seBookmark] = useState(false);
+  const [color, setColor] = useState("#C0C0C0")
+
+  const registerLikeClick = () => {
+    like ? setLike(false) : setLike(true);
+  }
+
     return (
       <View style={[styles.card, isFirst && styles.firstCard]}>
         <StatusBar barStyle={'dark-content'} />

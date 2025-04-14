@@ -1,8 +1,9 @@
 import { ActivityIndicator, FlatList, View } from "react-native";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import NewsContext from "../data/NewsProvider";
 import { useFonts } from "expo-font";
 import NewsCard from "@/components/NewsCard";
+import { useFocusEffect } from "expo-router";
 
 interface ContextProps {
   news: {};
@@ -12,7 +13,7 @@ interface ContextProps {
 const NewsPage = () => {
   const context = useContext(NewsContext);
   if (!context) throw new Error("Context must be used within a provider!");
-  const { news, loading } = context;
+  const { news, loading, setTag, setLoading } = context;
 
   const [fontsLoaded] = useFonts({
     Roboto: require("../../assets/fonts/Roboto-VariableFont_wdth,wght.ttf"),
@@ -21,6 +22,12 @@ const NewsPage = () => {
 
   if (!fontsLoaded) return null;
 
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(false)
+      setTag("world")
+    }, [])
+  );
   return (
     <View style={{ flex: 1 }}>
       {loading ? (
