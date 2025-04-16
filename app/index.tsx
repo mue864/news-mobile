@@ -14,7 +14,6 @@ import { useFonts } from "expo-font";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {MaterialIcons} from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import AsyncSorage from "@react-native-async-storage/async-storage"
 
 
 export default function Index() {

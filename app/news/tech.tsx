@@ -1,4 +1,4 @@
-import { View, FlatList, ActivityIndicator } from "react-native";
+import { SafeAreaView ,View, FlatList, ActivityIndicator } from "react-native";
 import NewsCard from "@/components/NewsCard";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useContext } from "react";
@@ -19,7 +19,7 @@ const Technology = () => {
     )
     
     return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView>
         {loading ? (
           <ActivityIndicator size={"large"} />
         ) : (
@@ -31,7 +31,7 @@ const Technology = () => {
             )}
           />
         )}
-      </View>
+      </SafeAreaView>
     );
 }
  

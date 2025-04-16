@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { useCallback, useContext, useState } from "react";
 import NewsContext from "../data/NewsProvider";
 import { useFonts } from "expo-font";
@@ -29,7 +29,7 @@ const NewsPage = () => {
     }, [])
   );
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       {loading ? (
         <ActivityIndicator size="large" style={{ marginTop: 20 }} />
       ) : (
@@ -37,11 +37,11 @@ const NewsPage = () => {
           data={news}
           keyExtractor={(item) => item.id}
           renderItem={({ item, index }) => (
-            <NewsCard news={item} isFirst={index === 0} />
+            <NewsCard news={item} isFirst={index === 0} isLiked={false} isBookMarked={false} />
           )}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
