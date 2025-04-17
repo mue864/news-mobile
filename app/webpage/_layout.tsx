@@ -1,7 +1,7 @@
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 
 const WebPageLayout = () => {
-  return <Stack.Screen options={{ title: "browser" }} />;
+  return <Slot />;
 };
 
 export default WebPageLayout;

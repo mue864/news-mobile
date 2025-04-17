@@ -121,12 +121,16 @@ const NewsCard: React.FC<NewsCardProps> = ({
   };
 
   return (
-    <TouchableOpacity 
-    onPress={() => route.push('/webpage')}
+    <TouchableOpacity
+      onPress={() =>
+        route.push({
+          pathname: "/webpage",
+          params: { url: news.url },
+        })
+      }
     >
       <View style={[styles.card, isFirst && styles.firstCard]}>
         <StatusBar barStyle={"dark-content"} />
-        <TouchableOpacity></TouchableOpacity>
         <Image
           source={{ uri: news.image }}
           style={[styles.image, isFirst && styles.firstImage]}

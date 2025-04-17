@@ -51,19 +51,6 @@ export default function NewsRouter() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="local"
-          options={{
-            title: "Local News",
-            tabBarIcon: ({ focused }) => (
-              <FontAwesome6
-                name="location-dot"
-                size={27}
-                color={focused ? "#B91C1C" : "gray"}
-              />
-            ),
-          }}
-        />
 
         <Tabs.Screen
           name="bookmarks"
@@ -74,6 +61,7 @@ export default function NewsRouter() {
                 name="bookmark"
                 size={25}
                 color={focused ? "#B91C1C" : "gray"}
+                solid={focused}
               />
             ),
           }}
