@@ -22,7 +22,6 @@ export default function Index() {
 
   // getting the height and width
   const screenWidth = Dimensions.get('window').width;
-  const screemHeight = Dimensions.get("window").height;
   
   const [fontsLoaded] = useFonts({
     "Roboto": require("../assets/fonts/Roboto-VariableFont_wdth,wght.ttf"),

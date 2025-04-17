@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, View, SafeAreaView, TouchableOpacity } from "react-native";
+import { ActivityIndicator, FlatList, View, SafeAreaView, TouchableOpacity, RefreshControl } from "react-native";
 import { useCallback, useContext, useState } from "react";
 import NewsContext from "../data/NewsProvider";
 import { useFonts } from "expo-font";
@@ -13,7 +13,7 @@ interface ContextProps {
 const NewsPage = () => {
   const context = useContext(NewsContext);
   if (!context) throw new Error("Context must be used within a provider!");
-  const { news, loading, setTag, setLoading } = context;
+  const { news, loading, setTag, setLoading, fetchData } = context;
 
   const [fontsLoaded] = useFonts({
     Roboto: require("../../assets/fonts/Roboto-VariableFont_wdth,wght.ttf"),
@@ -21,6 +21,19 @@ const NewsPage = () => {
   });
 
   if (!fontsLoaded) return null;
+
+  const [refresh, setRefresh] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefresh(true);
+    setLoading(true);
+    setTag("world")
+    fetchData();
+    
+    setTimeout(() => {
+      setRefresh(false);
+    }, 1000)
+  }, [setLoading]);
 
   useFocusEffect(
     useCallback(() => {
@@ -36,6 +49,9 @@ const NewsPage = () => {
         <FlatList
           data={news}
           keyExtractor={(item) => item.id}
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+          }
           renderItem={({ item, index }) => (
             <NewsCard news={item} isFirst={index === 0} isLiked={false} isBookMarked={false} />
           )}

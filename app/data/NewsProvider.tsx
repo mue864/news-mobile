@@ -20,6 +20,7 @@ type NewsContextTypes = {
   loading: boolean;
   setLoading: (loading: boolean) => void;
   news: Article[];
+  fetchData: () => void;
 };
 
 const NewsContext = createContext<NewsContextTypes | undefined>(undefined);
@@ -33,42 +34,38 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
   const [tag, setTag] = useState("technology");
   const [country, setCountry] = useState("world");
   const [loading, setLoading] = useState(true);
- const yesterday = new Date();
- yesterday.setDate(yesterday.getDate() - 2);
- const formattedDate = yesterday.toISOString().split("T")[0];
   const expoConfig = Constants.expoConfig;
   const { GUARDIAN_API_KEY } = expoConfig?.extra as {
     GUARDIAN_API_KEY: string;
   };
+  const fetchData = async () => {
+    const randomPage = Math.floor(Math.random() * 5) + 1;
+    try {
+      const res = await axios.get(
+        `https://content.guardianapis.com/search?api-key=${GUARDIAN_API_KEY}&section=${country}&tag=${tag}/${tag}&show-fields=thumbnail&order-by=newest&page=${randomPage}&page-size=15`
+      );
 
+      const data = res.data.response.results.map((article) => ({
+        id: article.id,
+        title: article.webTitle,
+        section: article.sectionName,
+        date: article.webPublicationDate,
+        url: article.webUrl,
+        image: article.fields?.thumbnail,
+      }));
+      setNews(data);
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("There has been an error", error);
+    }
+  };
   
   useEffect(() => {
-    const fetchData = async () => {
-      const randomPage = Math.floor(Math.random() * 5) + 1;
-      try {
-        const res = await axios.get(
-          `https://content.guardianapis.com/search?api-key=${GUARDIAN_API_KEY}&section=${country}&tag=${tag}/${tag}&show-fields=thumbnail&order-by=newest&page=${randomPage}&page-size=15`
-        );
-        
-        const data = res.data.response.results.map(article => ({
-            id: article.id,
-            title: article.webTitle,
-            section: article.sectionName,
-            date: article.webPublicationDate,
-            url: article.webUrl,
-            image: article.fields?.thumbnail
-        }));
-        setNews(data);
-        setLoading(false)
-      } catch (error) {
-        console.error("There has been an error", error);
-      }
-    };
-
     fetchData();
   }, [tag]);
 
-  return <NewsContext.Provider value={{news, tag ,loading, setLoading ,country ,setTag, setCountry,}}>{children}</NewsContext.Provider>;
+  return <NewsContext.Provider value={{news, tag ,loading, setLoading ,country ,setTag, setCountry, fetchData}}>{children}</NewsContext.Provider>;
 };
 
 export default NewsContext;
