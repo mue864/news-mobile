@@ -15,10 +15,29 @@
 - Fully mobile responsive
 
 ## Screenshots
-![Headlines](./screenshots/Headlines.png) 
-![BookMarks](./screenshots/Bookmarks.png) 
-![Sports](./screenshots/Sports.png) 
-![Technology](./screenshots/Technology.png) 
+<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+
+  <div style="text-align: center;">
+    <img src="./screenshots/Headlines.png" alt="Headlines Page" width="200" />
+    <p><strong>Headlines</strong></p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="./screenshots/Sports.png" alt="Sports Page" width="200" />
+    <p><strong>Sports</strong></p>
+  </div>
+
+  <div style="text-align: center;">
+    <img src="./screenshots/Technology.png" alt="Technology" width="200" />
+    <p><strong>Tech</strong></p>
+  </div>
+  <div style="text-align: center;">
+    <img src="./screenshots/Bookmarks.png" alt="Bookmarks" width="200" />
+    <p><strong>Bookmarks</strong></p>
+  </div>
+
+</div>
+
 
 ## Technologies
 - React Native + Expo Router
