@@ -1,50 +1,49 @@
-# Welcome to your Expo app 👋
+# NewsFlash - A React Native App to view News using The Guardian API
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## App Description
+- Browse through the latest Headlines
+- View Articles in full using the in-App browser
+- Bookmark news headlines for offline viewing
+- Like those stories that you enjoy
+- Works both on Android and iOS
 
-## Get started
+## Features
+- Real-time news from the Guardian API
+- WebView integration for viewing full Articles in-App
+- AsyncStorage for offline bookmarks
+- Like or bookmark toggles
+- Fully mobile responsive
 
-1. Install dependencies
+## Screenshots
+![Headlines]('./screenshots/Headlines.png') 
+![BookMarks]('./screenshots/Bookmarks.png') 
+![Sports]('./screenshots/Sports.png') 
+![Technology]('./screenshots/Technology.png') 
 
-   ```bash
-   npm install
-   ```
+## Technologies
+- React Native + Expo Router
+- TypeScript
+- AsyncStorage
+- React Native WebView
+- Expo Icons (FontAwesome6)
 
-2. Start the app
+## What I learned
+This project introduced helped me master:
+- API integration
+- Expo Router navigation and routing
+- Working with AsyncStorage for persistant data
+- Implementing WebView for in-app web browsing
 
-   ```bash
-    npx expo start
-   ```
+### Getting Started
 
-In the output, you'll find options to open the app in a
+1. Clone the Repo: 
+`git clone https://github.com/mue864/news-mobile`
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+2. Navigate to project folder: 
+`cd news-mobile`
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+3. Install required dependancies: 
+`npm install`
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+4. Run app: 
+`npm start`

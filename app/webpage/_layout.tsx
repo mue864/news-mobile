@@ -1,7 +1,7 @@
-import { Slot } from "expo-router";
+import { Stack } from "expo-router";
 
 const WebPageLayout = () => {
-  return <Slot />;
+  return <Stack />
 };
 
 export default WebPageLayout;

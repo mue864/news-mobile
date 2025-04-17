@@ -101,19 +101,15 @@ const NewsCard: React.FC<NewsCardProps> = ({
   };
 
   return (
-    <TouchableOpacity
-      onPress={() =>
-        route.push({
-          pathname: "/webpage",
-          params: { url: news.url },
-        })
-      }
-      style={{paddingHorizontal: 14}}
-    >
-      <View
+    <View style={{ paddingHorizontal: 14 }}>
+      <TouchableOpacity
         style={[styles.card, isFirst && styles.firstCard]}
-        focusable={false}
-
+        onPress={() =>
+          route.push({
+            pathname: "/webpage",
+            params: { url: news.url },
+          })
+        }
       >
         <StatusBar barStyle={"dark-content"} />
         <Image
@@ -126,30 +122,48 @@ const NewsCard: React.FC<NewsCardProps> = ({
           >
             {news.title}
           </Text>
-          <View style={[styles.miniBar, isFirst && styles.miniBarFirst]}>
-            <Pressable onPress={registerLikeClick}>
-              <FontAwesome6
-                name="thumbs-up"
-                size={21}
-                color={like ? "#B91C1C" : "#C0C0C0"}
-                solid={like}
-              />
-            </Pressable>
 
-            <Pressable
-              onPress={() => registerBookMarkClick(news, like, bookmark)}
-            >
-              <FontAwesome6
-                name="bookmark"
-                size={21}
-                color={bookmark ? "#B91C1C" : "#C0C0C0"}
-                solid={bookmark}
-              />
-            </Pressable>
+          <View style={{ flex: 1 }}>
+            {isFirst && (
+              <View>
+                <Pressable
+                  style={styles.readMore}
+                  onPress={() =>
+                    route.push({
+                      pathname: "/webpage",
+                      params: { url: news.url },
+                    })
+                  }
+                >
+                  <Text style={styles.readMoreText}>Read More</Text>
+                </Pressable>
+              </View>
+            )}
+            <View style={[styles.miniBar, isFirst && styles.miniBarFirst]}>
+              <Pressable onPress={registerLikeClick}>
+                <FontAwesome6
+                  name="thumbs-up"
+                  size={21}
+                  color={like ? "#B91C1C" : "#C0C0C0"}
+                  solid={like}
+                />
+              </Pressable>
+
+              <Pressable
+                onPress={() => registerBookMarkClick(news, like, bookmark)}
+              >
+                <FontAwesome6
+                  name="bookmark"
+                  size={21}
+                  color={bookmark ? "#B91C1C" : "#C0C0C0"}
+                  solid={bookmark}
+                />
+              </Pressable>
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -157,9 +171,6 @@ export default NewsCard;
 
 const deviceWidth = Dimensions.get("screen").width;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   card: {
     alignItems: "center",
     textAlign: "center",
@@ -167,7 +178,12 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse",
     borderRadius: 12,
     backgroundColor: "#fff",
-    marginBottom: 16,
+    marginBottom: 10,
+    elevation: 3,
+    shadowColor: "#000", // iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3.84,
   },
   firstCard: {
     flexDirection: "column",
@@ -193,17 +209,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headingText: {
-    fontWeight: "bold",
+    fontWeight: "500",
     fontSize: 16,
-    textAlign: "left",
+    textAlign: "center",
+    width: 200,
   },
   headingFirstText: {
+    fontWeight: "bold",
     fontSize: 18,
     textAlign: "center",
+    width: "auto",
   },
   image: {
     width: 80,
     height: 80,
+    borderRadius: 8,
   },
   miniBar: {
     flex: 1,
@@ -211,10 +231,23 @@ const styles = StyleSheet.create({
     gap: 20,
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 10,
   },
   miniBarFirst: {
-    marginTop: 15,
+    marginTop: 10,
     justifyContent: "flex-end",
     paddingLeft: 70,
   },
+  readMore: {
+    backgroundColor: "#EE4B2B",
+    width: 90,
+    alignItems: "center",
+    borderRadius: 50,
+    top: 40,
+    padding: 4
+  },
+  readMoreText: {
+    color: '#fff',
+    fontWeight: '500'
+  }
 });
