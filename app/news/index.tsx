@@ -27,8 +27,7 @@ const NewsPage = () => {
   const onRefresh = useCallback(async () => {
     setRefresh(true);
     setLoading(true);
-    setTag("world")
-    fetchData();
+    fetchData("world");
     
     setTimeout(() => {
       setRefresh(false);
@@ -49,6 +48,7 @@ const NewsPage = () => {
         <FlatList
           data={news}
           keyExtractor={(item) => item.id}
+          
           refreshControl={
             <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
           }

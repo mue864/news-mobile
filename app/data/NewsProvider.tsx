@@ -20,7 +20,7 @@ type NewsContextTypes = {
   loading: boolean;
   setLoading: (loading: boolean) => void;
   news: Article[];
-  fetchData: () => void;
+  fetchData: (tag: string) => void;
 };
 
 const NewsContext = createContext<NewsContextTypes | undefined>(undefined);
@@ -38,14 +38,23 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
   const { GUARDIAN_API_KEY } = expoConfig?.extra as {
     GUARDIAN_API_KEY: string;
   };
-  const fetchData = async () => {
+  const fetchData = async (tag: string) => {
+
+    setTag(tag);
     const randomPage = Math.floor(Math.random() * 5) + 1;
     try {
       const res = await axios.get(
         `https://content.guardianapis.com/search?api-key=${GUARDIAN_API_KEY}&section=${country}&tag=${tag}/${tag}&show-fields=thumbnail&order-by=newest&page=${randomPage}&page-size=15`
       );
 
-      const data = res.data.response.results.map((article) => ({
+      const data = res.data.response.results.map((article: {
+        id: string,
+        webTitle: string,
+        sectionName: string,
+        webPublicationDate: string,
+        webUrl: string,
+
+      }) => ({
         id: article.id,
         title: article.webTitle,
         section: article.sectionName,
@@ -62,7 +71,7 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
   };
   
   useEffect(() => {
-    fetchData();
+    fetchData(tag);
   }, [tag]);
 
   return <NewsContext.Provider value={{news, tag ,loading, setLoading ,country ,setTag, setCountry, fetchData}}>{children}</NewsContext.Provider>;

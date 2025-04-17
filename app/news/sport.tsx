@@ -14,7 +14,7 @@ const Sport = () => {
   const onRefresh = useCallback(async () => {
     setRefresh(true);
     setLoading(true);
-    fetchData();
+    fetchData("sport");
 
     setTimeout(() => {
       setRefresh(false);

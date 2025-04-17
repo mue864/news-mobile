@@ -7,12 +7,13 @@ import {
   Dimensions,
   Pressable,
   StatusBar,
+  Platform,
 } from "react-native";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {Webview} from "react-native-webview";
 import { useRouter } from "expo-router";
+import { Shadow } from "react-native-shadow-2";
 
 interface NewsCardProps {
   news: {
@@ -35,7 +36,6 @@ type pageValues = {
   image?: string;
   url: string;
 };
-
 
 const NewsCard: React.FC<NewsCardProps> = ({
   news,
@@ -65,27 +65,31 @@ const NewsCard: React.FC<NewsCardProps> = ({
     isLiked: boolean,
     bookmark: boolean
   ) => {
+    const pageToSave = {
+      id: news.id,
+      title: news.title,
+      section: news.section,
+      image: news.image || "",
+      url: news.url,
+      isLiked,
+      isBookMarked: true,
+    };
+
     setBookmark((prev) => !prev);
-    savePage(news, isLiked, true);
-    saveToStorage(page);
+    saveToStorage(pageToSave);
   };
 
-  const savePage = (news: pageValues, isLiked: boolean, bookmark: boolean) => {
-    page.id = news.id;
-    page.title = news.title;
-    page.section = news.section;
-    page.image = news.image || ""; // if image is undefined, then we set it to an empty string
-    page.url = news.url;
-    page.isLiked = isLiked;
-    page.isBookMarked = bookmark;
-  };
-
-  const saveToStorage = async (data) => {
+  const saveToStorage = async (data: { id: string }) => {
     try {
       const prevData = await AsyncStorage.getItem("data");
       let updatedData = [];
       if (prevData !== null) {
         updatedData = JSON.parse(prevData);
+
+        const alreadyExists = updatedData.some(
+          (item: { id: string }) => item.id === data.id
+        );
+        if (alreadyExists) return;
       }
 
       updatedData.push(data);
@@ -93,30 +97,6 @@ const NewsCard: React.FC<NewsCardProps> = ({
       console.log("Data Saved!");
     } catch (error) {
       console.error("Something happened when saving data: ", error);
-    }
-  };
-
-  const getFromStorage = async (data) => {
-    try {
-      const storedData = await AsyncStorage.getItem("data");
-
-      let temp = [];
-      if (storedData !== null) {
-        temp = JSON.parse(storedData);
-
-        const id = temp.map((item) => {
-          if (data.id === item.id) {
-            return true;
-          } else {
-            return false;
-          }
-        });
-
-        console.log(id);
-        return id;
-      }
-    } catch (error) {
-      console.error("Error getting data: ", error);
     }
   };
 
@@ -128,8 +108,13 @@ const NewsCard: React.FC<NewsCardProps> = ({
           params: { url: news.url },
         })
       }
+      style={{paddingHorizontal: 14}}
     >
-      <View style={[styles.card, isFirst && styles.firstCard]}>
+      <View
+        style={[styles.card, isFirst && styles.firstCard]}
+        focusable={false}
+
+      >
         <StatusBar barStyle={"dark-content"} />
         <Image
           source={{ uri: news.image }}
@@ -180,20 +165,26 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 20,
     flexDirection: "row-reverse",
-    borderBottomWidth: 1,
-    borderBottomColor: "#D3D3D3",
+    borderRadius: 12,
+    backgroundColor: "#fff",
+    marginBottom: 16,
   },
   firstCard: {
     flexDirection: "column",
     height: "auto",
-    elevation: 0,
     borderBottomWidth: 1,
     borderBottomColor: "#D3D3D3",
     paddingTop: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
   },
   firstImage: {
-    width: deviceWidth,
+    width: 330,
     height: 200,
+    borderRadius: 12,
+    padding: 5,
+    marginTop: 17,
   },
   firstTextWrapper: {
     padding: 10,
