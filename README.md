@@ -15,10 +15,10 @@
 - Fully mobile responsive
 
 ## Screenshots
-![Headlines]('./screenshots/Headlines.png') 
-![BookMarks]('./screenshots/Bookmarks.png') 
-![Sports]('./screenshots/Sports.png') 
-![Technology]('./screenshots/Technology.png') 
+![Headlines](./screenshots/Headlines.png) 
+![BookMarks](./screenshots/Bookmarks.png) 
+![Sports](./screenshots/Sports.png) 
+![Technology](./screenshots/Technology.png) 
 
 ## Technologies
 - React Native + Expo Router
