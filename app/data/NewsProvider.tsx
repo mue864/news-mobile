@@ -63,7 +63,6 @@ export const NewsProvider: React.FC<NewsProviderProps> = ({ children }) => {
         image: article.fields?.thumbnail,
       }));
       setNews(data);
-      console.log(data);
       setLoading(false);
     } catch (error) {
       console.error("There has been an error", error);

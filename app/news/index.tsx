@@ -20,7 +20,9 @@ const NewsPage = () => {
     Monsterrat: require("../../assets/fonts/Montserrat-VariableFont_wght.ttf"),
   });
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded) {
+    <></>
+  };
 
   const [refresh, setRefresh] = useState(false);
 
@@ -41,19 +43,23 @@ const NewsPage = () => {
     }, [])
   );
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F1F5F9" }}>
       {loading ? (
         <ActivityIndicator size="large" style={{ marginTop: 20 }} />
       ) : (
         <FlatList
           data={news}
           keyExtractor={(item) => item.id}
-          
           refreshControl={
             <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
           }
           renderItem={({ item, index }) => (
-            <NewsCard news={item} isFirst={index === 0} isLiked={false} isBookMarked={false} />
+            <NewsCard
+              news={item}
+              isFirst={index === 0}
+              isLiked={false}
+              isBookMarked={false}
+            />
           )}
         />
       )}

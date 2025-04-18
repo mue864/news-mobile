@@ -18,18 +18,26 @@
 <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
 
   <div style="text-align: center;">
+    <img src="./screenshots/Home.png" alt="Headlines Page" width="200" />
+    <p><strong>Onboarding</strong></p>
+  </div>
+  <div style="text-align: center;">
+    <img src="./screenshots/Consent.png" alt="Headlines Page" width="200" />
+    <p><strong>Modal</strong></p>
+  </div>
+  <div style="text-align: center;">
     <img src="./screenshots/Headlines.png" alt="Headlines Page" width="200" />
     <p><strong>Headlines</strong></p>
   </div>
 
   <div style="text-align: center;">
-    <img src="./screenshots/Sports.png" alt="Sports Page" width="200" />
+    <img src="./screenshots/Sport.png" alt="Sports Page" width="200" />
     <p><strong>Sports</strong></p>
   </div>
 
   <div style="text-align: center;">
     <img src="./screenshots/Technology.png" alt="Technology" width="200" />
-    <p><strong>Tech</strong></p>
+    <p><strong>Technology</strong></p>
   </div>
   <div style="text-align: center;">
     <img src="./screenshots/Bookmarks.png" alt="Bookmarks" width="200" />

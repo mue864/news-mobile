@@ -7,7 +7,7 @@ import {
   Dimensions,
   Pressable,
   StatusBar,
-  Platform,
+  Share
 } from "react-native";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useState } from "react";
@@ -56,6 +56,16 @@ const NewsCard: React.FC<NewsCardProps> = ({
     url: "",
   };
 
+      const onShare = async (title: string, url: string) => {
+        try {
+          await Share.share({
+            message: `${title} \n Read More \n ${url}`,
+          });
+        } catch (error) {
+          console.error("An error has happened: ", error);
+        }
+      };
+
   const registerLikeClick = () => {
     setLike((prev) => !prev);
   };
@@ -94,7 +104,6 @@ const NewsCard: React.FC<NewsCardProps> = ({
 
       updatedData.push(data);
       await AsyncStorage.setItem("data", JSON.stringify(updatedData));
-      console.log("Data Saved!");
     } catch (error) {
       console.error("Something happened when saving data: ", error);
     }
@@ -144,7 +153,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
                 <FontAwesome6
                   name="thumbs-up"
                   size={21}
-                  color={like ? "#B91C1C" : "#C0C0C0"}
+                  color={like ? "#3B82F6" : "#C0C0C0"}
                   solid={like}
                 />
               </Pressable>
@@ -155,9 +164,13 @@ const NewsCard: React.FC<NewsCardProps> = ({
                 <FontAwesome6
                   name="bookmark"
                   size={21}
-                  color={bookmark ? "#B91C1C" : "#C0C0C0"}
+                  color={bookmark ? "#3B82F6" : "#C0C0C0"}
                   solid={bookmark}
                 />
+              </Pressable>
+
+              <Pressable onPress={() => onShare(news.title, news.url)}>
+                <FontAwesome6 name="share" size={21} color={"#C0C0C0"} />
               </Pressable>
             </View>
           </View>
@@ -213,6 +226,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     width: 200,
+    color: "#374151",
   },
   headingFirstText: {
     fontWeight: "bold",
@@ -239,15 +253,15 @@ const styles = StyleSheet.create({
     paddingLeft: 70,
   },
   readMore: {
-    backgroundColor: "#EE4B2B",
+    backgroundColor: "#1E293B",
     width: 90,
     alignItems: "center",
     borderRadius: 50,
     top: 40,
-    padding: 4
+    padding: 4,
   },
   readMoreText: {
-    color: '#fff',
-    fontWeight: '500'
-  }
+    color: "#fff",
+    fontWeight: "500",
+  },
 });

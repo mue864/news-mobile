@@ -8,7 +8,7 @@ export default function NewsRouter() {
       <Tabs
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: "#B91C1C",
+          tabBarActiveTintColor: "#3B82F6",
           tabBarInactiveTintColor: "gray",
         }}
       >
@@ -20,7 +20,7 @@ export default function NewsRouter() {
               <FontAwesome6
                 name="newspaper"
                 size={30}
-                color={focused ? "#B91C1C" : "gray"}
+                color={focused ? "#3B82F6" : "gray"}
               />
             ),
           }}
@@ -33,7 +33,7 @@ export default function NewsRouter() {
               <FontAwesome6
                 name="volleyball"
                 size={25}
-                color={focused ? "#B91C1C" : "gray"}
+                color={focused ? "#3B82F6" : "gray"}
               />
             ),
           }}
@@ -46,7 +46,7 @@ export default function NewsRouter() {
               <FontAwesome6
                 name="laptop"
                 size={25}
-                color={focused ? "#B91C1C" : "gray"}
+                color={focused ? "#3B82F6" : "gray"}
               />
             ),
           }}
@@ -60,7 +60,7 @@ export default function NewsRouter() {
               <FontAwesome6
                 name="bookmark"
                 size={25}
-                color={focused ? "#B91C1C" : "gray"}
+                color={focused ? "#3B82F6" : "gray"}
                 solid={focused}
               />
             ),
