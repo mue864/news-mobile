@@ -15,36 +15,10 @@ export default function NewsRouter() {
         <Tabs.Screen
           name="index"
           options={{
-            title: "Headlines",
+            title: "Home",
             tabBarIcon: ({ focused }) => (
               <FontAwesome6
-                name="newspaper"
-                size={30}
-                color={focused ? "#3B82F6" : "gray"}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="sport"
-          options={{
-            title: "Sports",
-            tabBarIcon: ({ focused }) => (
-              <FontAwesome6
-                name="volleyball"
-                size={25}
-                color={focused ? "#3B82F6" : "gray"}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="tech"
-          options={{
-            title: "Technology",
-            tabBarIcon: ({ focused }) => (
-              <FontAwesome6
-                name="laptop"
+                name="house"
                 size={25}
                 color={focused ? "#3B82F6" : "gray"}
               />
